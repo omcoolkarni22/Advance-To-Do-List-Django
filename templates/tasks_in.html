@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<style>
+body {font-family:  sans-serif;}
+* {box-sizing: border-box;}
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: initial;
+  border: 1px solid #ddd;
+  width: 14%;
+}
+
+.form-inline button {
+  padding: 10px 20px;
+  background-color: initial;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+}
+
+.form-inline button:hover {
+  background-color: initial;
+}
+
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.made_form {
+
+   font-family:sans-serif;
+   border-radius: 4px;
+   color: #888;
+   box-shadow: none;
+   line-height: 27px;
+   margin-left:2%;
+}
+
+select {
+  width: 13%;
+  float: right;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: initial;
+  color: gainsboro;
+}
+hr.new2 {
+  border-top: 1px dashed rgba(255, 255, 255, 0.6);
+}
+</style>
+
+{% endblock css %}
+
+
+{% block tasks_in %}
+
+<form class="form-inline" action="add_tasks" method="post">
+  {% csrf_token %}
+  <input type="text" id="task" placeholder="Enter Task..." name="task">
+
+  <label for="deadline">Deadline:</label>
+  <input class="made_form"  type="date" id="deadline" name="deadline">
+  <select id="statu" name="t_bar">
+  <option value="Personal">Personal</option>
+  <option value="Work">Work</option>
+  <option value="Shopping">Shopping</option>
+    <option value="Other">Other</option>
+  </select>
+  <button class="made_form" type="submit" >Add Task</button>
+</form>
+<br>
+
+<hr class="new2">
+{% if todos is not None %}
+  {% for todo in todos %}
+<form class="form-inline" action="changes_in_task/{{ todo.id }}" method="post">
+  {% csrf_token %}
+  <input type="text" id="tasks" value="{{ todo.Task }}" placeholder="Task Shown Here..." name="task" readonly>
+
+  <label for="start_date">Start Date:</label>
+  <input class="made_form"  type="text"  value="{{ todo.start_date }}" id="start_date" name="start_date" readonly>
+
+  <label for="end_date" style="font-family:sans-serif;">End Date:</label>
+  <input class="made_form"  type="text" value="{{ todo.end_date }}"  id="end_date" name="end_date" readonly>
+
+  <select id="status" name="bar">
+  <option value="in_progress">In-Progress</option>
+  <option value="completed">Completed</option>
+  <option value="archive">Archive</option>
+  </select>
+  <select id="stat" name="t_bar1">
+  <option value="{{ todo.type }}"> {{ todo.type }} </option>
+
+  </select>
+  <button class="made_form" type="submit" >Update</button>
+</form>
+  {% endfor %}
+<hr class="new2">
+{% endif %}
+
+{% if archives is not None %}
+  {% for archive in archives %}
+<form class="form-inline">
+  {% csrf_token %}
+  <input type="text" id="tasks1" value="{{ archive.Task }}" placeholder="Task Shown Here..." name="task" readonly>
+
+  <label for="start_date">Start Date:</label>
+  <input class="made_form"  type="text"  value="{{ archive.start_date }}" id="start_date1" name="start_date" readonly>
+
+  <label for="end_date" style="font-family:sans-serif;">End Date:</label>
+  <input class="made_form"  type="text" value="{{ archive.end_date }}"  id="end_date1" name="end_date" readonly>
+
+  <select id="status1" name="bar">
+    <option value="archive">Archive</option>
+  <option value="completed">Completed</option>
+
+  </select>
+  <select id="stat1" name="t_bar1">
+  <option value="{{ archive.type }}">{{ archive.type }}</option>
+  </select>
+
+</form>
+  {% endfor %}
+<hr class="new2">
+{% endif %}
+
+
+{% endblock tasks_in %}

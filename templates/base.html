@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Advance To-Do-List</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href=" {% static 'assets/bootstrap/css/bootstrap.min.css' %} ">
+        <link rel="stylesheet" href=" {% static 'assets/font-awesome/css/font-awesome.min.css' %} ">
+		<link rel="stylesheet" href=" {% static 'assets/css/form-elements.css' %} ">
+        <link rel="stylesheet" href=" {% static 'assets/css/style.css' %}">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <style>
+    body{
+      background-color: #343a40 ;
+      color: white;
+      margin-left: 10%;
+       margin-right: 10%;
+      }
+      .alert {
+  padding: 20px;
+  background-color: #343a40;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+.archive {
+                    float: right;
+                    margin-right: 3%;
+                    background-color: #343a40;
+                    border: none;
+                     margin: 5px 10px 5px 0;
+                     padding: 10px;
+                     background-color: initial;
+                     border: 1px solid #ddd;
+                     font-family:sans-serif;
+                   border-radius: 4px;
+                   color: #888;
+                   box-shadow: none;
+                   line-height: 27px;
+
+                   margin-bottom: 2%;
+}
+
+
+    </style>
+
+     {% block css %}
+        {% endblock css %}
+
+    </head>
+
+    <body>
+
+        <!-- Top content -->
+        <div class="top-content">
+        	
+            <div class="inner-bg">
+                <div class="container">
+                	
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2 text">
+							{% if user.is_authenticated %}
+                            <h1><strong>To-Do-List</strong> of <strong> {{ user.username }} </strong></h1>
+
+							{% else %}
+                            <h1><strong>To-Do-List</strong> Login &amp; Register Forms</h1>
+
+                            <div class="description">
+                            	<p>
+	                            	This is a <strong>"Simple"</strong> and <strong> "Secure"</strong>  To-Do-List Web App. <br>
+	                            	Use it and <strong>"Never Forget"</strong> your <strong> "Important" </strong> Tasks. <br>
+                            	</p>
+                            </div>
+							{% endif %}
+                            {% if messages %}
+                                {% for message in messages %}
+                            <div class="alert">
+
+                                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                  <p> <strong>{{ message }}</strong> </p>
+
+                            </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {% block body %}
+					{% endblock body %}
+
+                </div>
+            </div>
+
+            {% block tasks_in %}
+			{% endblock tasks_in %}
+            <button class="archive" style="margin-right: 1%;"> <a  style="color:white;" > Help </a></button>
+            {% if user.is_authenticated %}
+
+             <button class="archive" style="margin-right: 1%;"><a href="logout" style="color:white;"> Logout </a></button>
+
+            <button class="archive"> <a href="archive_task"  style="color:white;" > Archived Tasks </a></button>
+
+            {% endif %}
+
+        </div>
+
+        <!-- Footer -->
+        <footer>
+        	<div class="container">
+        		<div class="row">
+        			<div class="col-sm-8 col-sm-offset-2">
+        				<div class="footer-border"></div>
+        				<p>Made by Omkar Kulkarni, Prasad Sangamkar, Vaibhav Lale &amp; Sanket Babar
+        					having a lot of fun. <i class="fa fa-smile-o"></i></p>
+        			</div>
+        			
+        		</div>
+        	</div>
+        </footer>
+        <!-- Javascript -->
+        <script src=" {% static 'assets/js/jquery-1.11.1.min.js' %} "></script>
+        <script src=" {% static 'assets/bootstrap/js/bootstrap.min.js' %} "></script>
+        <script src=" {% static 'assets/js/scripts.js' %} "></script>
+
+    </body>
+
+</html>
