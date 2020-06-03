@@ -10,6 +10,6 @@ Advance To-Do-List Django Web App with Login &amp; Registration Features Using D
 
 # Run in your System
 1. Clone or download the repo
-2. Install requirements.txt file via _pip install requirements.txt_
+2. Install requirements.txt file via _pip install -r requirements.txt_
 3. open cmd in folder where manage.py file is and fire command _python manage.py runserver_
 4. Open http://127.0.0.1:8000/ in Your Browser to see app running.
