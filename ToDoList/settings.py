@@ -82,6 +82,25 @@ DATABASES = {
 }
 
 
+# DATA BASE CODE FOR MYSQL
+# INSTALL mysqlclient via pip install mysql client to use MYSQL
+# Uncomment the below part and comment the above database part.
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': ' ', #Your Database name
+        'USER': ' ', #SQL USERNAME
+        'PASSWORD': ' ', #SQL password
+        'HOST': 'localhost', #host will not change
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
+    }
+}
+
+'''
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
