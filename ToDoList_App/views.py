@@ -5,6 +5,7 @@ from django.contrib import messages
 # Create your views here.
 from django.contrib.auth.decorators import user_passes_test
 from .models import Tasks
+from django.views.decorators.csrf import csrf_protect
 
 
 @user_passes_test(lambda user: not user.username, login_url='login', redirect_field_name=None)
@@ -12,6 +13,7 @@ def index(request):
     return render(request, 'index.html')
 
 
+@csrf_protect
 def Login(request):
     if request.method == 'POST':
         username = request.POST['form-username']
